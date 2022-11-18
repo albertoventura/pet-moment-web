@@ -1,4 +1,6 @@
+import { ViewerService } from './service/viewer.service';
 import { Component, OnInit } from '@angular/core';
+import { Data } from './model/viewer.model';
 
 @Component({
   selector: 'app-viewer',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewerComponent implements OnInit {
 
-  constructor() { }
+  dogs: Data[] = [];
+
+  constructor(private viewerService: ViewerService) { }
 
   ngOnInit(): void {
+    this.get();
   }
 
+  get(){
+    this.viewerService.get().subscribe(
+      (a) => {
+        console.log('a', a);
+        this.dogs = a;
+        //this.dogs = a
+        console.log(this.dogs[0]);
+
+      }
+    );
+  }
 }
