@@ -9,21 +9,42 @@ import { Data } from './model/viewer.model';
 })
 export class ViewerComponent implements OnInit {
 
-  dogs: Data[] = [];
+  data?: Data;
+  isLoading: boolean;
 
-  constructor(private viewerService: ViewerService) { }
+  constructor(private viewerService: ViewerService) {
+    this.isLoading = true;
+  }
 
   ngOnInit(): void {
-    this.get();
+    //this.get();
+    this.viewerService.getValue().subscribe((value) => {
+      console.log('@@@@@@@@@@@@', value);
+      this.get();
+    });
   }
 
   get(){
+    this.isLoading = true;
+    let data = new Data();
     this.viewerService.get().subscribe(
       (a) => {
-        console.log('a', a);
-        this.dogs = a;
+        console.log('animal', a);
+        console.log('breeds', a[0]?.breeds[0]);
+        data.id = a[0]?.id;
+        data.img = a[0]?.url;
+        data.width = a[0]?.width;
+        data.height = a[0]?.height;
+        data.breedName = a[0]?.breeds[0]?.name;
+        data.breedDescription = a[0]?.breeds[0]?.description;
+        data.breedTemperament = a[0]?.breeds[0]?.temperament;
+        this.data = data;
+        console.log('data', this.data);
+        this.isLoading = false;
+
+        //this.dogs = a;
         //this.dogs = a
-        console.log(this.dogs[0]);
+        //console.log(this.dogs[0]);
 
       }
     );

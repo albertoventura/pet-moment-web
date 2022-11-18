@@ -8,7 +8,7 @@
  </div>
  <div>
    <span class="animal-type-slide-title">Cat</span>
-   <mat-slide-toggle [(ngModel)]="isToShowDog"></mat-slide-toggle>
+   <mat-slide-toggle [(ngModel)]="isToShowDog" (change)="onToggle($event)" [checked]="isToShowDog"></mat-slide-toggle>
    <span class="animal-type-slide-title">Dog</span>
  </div>
 </mat-toolbar>

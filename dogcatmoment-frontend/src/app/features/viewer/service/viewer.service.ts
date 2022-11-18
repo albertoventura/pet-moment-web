@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Data } from '../model/viewer.model';
+import { IData } from '../model/viewer.model';
+import { key } from 'key/key';
 
 
 
@@ -10,16 +11,47 @@ import { Data } from '../model/viewer.model';
   providedIn: 'root'
 })
 export class ViewerService {
-  url = 'https://api.thedogapi.com/v1/images/search';
 
-  constructor(private http: HttpClient) { }
+  dogUrl = 'https://api.thedogapi.com/v1/images/search';
+  catUrl = 'https://api.thecatapi.com/v1/images/search';
+  mainUrl = '';
+  private toShowDog: BehaviorSubject<boolean>;
+  showDog: boolean = true;
 
-  get(): Observable<Data[]> {
+  constructor(private http: HttpClient) {
+    this.toShowDog = new BehaviorSubject<boolean>(true);
+  }
+
+  chooseDogOrCatUrl(){
+    if(this.showDog){
+      this.mainUrl = this.dogUrl;
+    }else{
+      this.mainUrl = this.catUrl;
+    }
+  }
+
+  get(): Observable<any[]> {
+    this.chooseDogOrCatUrl();
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
+        'x-api-key': this.showDog ? key.dog_key : key.cat_key
       })
     };
-    return this.http.get<Data[]>(this.url, httpOptions);
+    return this.http.get<any[]>(this.mainUrl, httpOptions);
+  }
+
+  onToggleChange(showDog: boolean){
+    console.log('on change in service', showDog);
+    this.showDog = showDog;
+    //this.chooseDogOrCatUrl();
+    //this.get();
+  }
+
+  setValue(toggleChange: boolean): void {
+    this.toShowDog.next(toggleChange);
+  }
+
+  getValue(): Observable<boolean> {
+    return this.toShowDog.asObservable();
   }
 }
