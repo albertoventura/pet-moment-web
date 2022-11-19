@@ -47,10 +47,7 @@ export class ViewerService {
     return this.http.get<any[]>(this.mainUrl+this.breedParams);
   }
   onToggleChange(showDog: boolean){
-    console.log('on change in service', showDog);
     this.showDog = showDog;
-    //this.chooseDogOrCatUrl();
-    //this.get();
   }
 
   setValue(toggleChange: boolean): void {
