@@ -1,15 +1,9 @@
 <div class="container">
   <div class="content">
-    <mat-card class="example-card">
+    <!-- <mat-card>
       <mat-card-header>
         <mat-card-title >{{data?.breedName}}</mat-card-title>
-        <!-- <mat-card-subtitle>{{data?.breedDescription}}</mat-card-subtitle> -->
       </mat-card-header>
-      <!-- <div>
-        <select name="" id="">
-          <option *ngFor="let breed of breedList">{{breed}}</option>
-        </select>
-      </div> -->
       <div class="img-content">
         <div class="overlay">
           <mat-spinner *ngIf="isLoading && hasImg"></mat-spinner>
@@ -28,7 +22,6 @@
           <button mat-icon-button (click)="saveDataOnLocalstorage()" [ngClass]="dataSaved ? 'red': ''" matTooltip="Save this photo">
             <mat-icon>favorite</mat-icon>
           </button>
-          <!-- <button mat-icon-button [cdkCopyToClipboard]="data?.img!"> -->
           <button mat-icon-button [cdkCopyToClipboard]="data?.img!" matTooltip="Copy to clipboard">
             <mat-icon>content_copy</mat-icon>
           </button>
@@ -40,7 +33,15 @@
       <mat-card-footer>
         <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
       </mat-card-footer>
-    </mat-card>
+    </mat-card> -->
+    <app-card
+      [data]="data!"
+      [isLoading]="isLoading"
+      [hasImg]="hasImg"
+      [dataSaved]="dataSaved"
+      (saveDataOnLocalstorage)="saveDataOnLocalstorage()"
+      (getNewImage)="getImage()"
+    ></app-card>
   </div>
 </div>
 

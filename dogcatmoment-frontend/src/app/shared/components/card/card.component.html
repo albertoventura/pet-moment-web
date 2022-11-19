@@ -1,0 +1,35 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title >{{data?.breedName}}</mat-card-title>
+  </mat-card-header>
+  <div class="img-content">
+    <div class="overlay">
+      <mat-spinner *ngIf="isLoading && hasImg"></mat-spinner>
+    </div>
+    <img
+      mat-card-image
+      [src]="data?.img"
+      [alt]="data?.breedName"
+      [ngClass]="isLoading ? 'img-half-opacity' : ''"
+      *ngIf="data?.img"
+    >
+  </div>
+
+  <mat-card-actions class="actions-field">
+    <div>
+      <button mat-icon-button (click)="emitSaveDataOnLocalstore()" [ngClass]="dataSaved ? 'red': ''" matTooltip="Save this photo">
+        <mat-icon>favorite</mat-icon>
+      </button>
+      <!-- <button mat-icon-button [cdkCopyToClipboard]="data?.img!"> -->
+      <button mat-icon-button [cdkCopyToClipboard]="data?.img!" matTooltip="Copy to clipboard">
+        <mat-icon>content_copy</mat-icon>
+      </button>
+    </div>
+    <button mat-icon-button (click)="emitGetNewImage()" matTooltip="Get a new photo">
+      <mat-icon>autorenew</mat-icon>
+    </button>
+  </mat-card-actions>
+  <mat-card-footer>
+    <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>

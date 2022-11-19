@@ -1,1 +1,5 @@
-<p>favs works!</p>
+<ng-container *ngFor="let fav of favList">
+  <mat-card>
+    <img [src]="fav._img" alt="">
+  </mat-card>
+<ng-container>

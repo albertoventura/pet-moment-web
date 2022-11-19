@@ -1,3 +1,4 @@
+import { FavsModule } from './features/favs/favs.module';
 import { ExploreModule } from './features/explore/explore.module';
 import { ToolbarModule } from './core/components/toolbar/toolbar.module';
 import { NgModule } from '@angular/core';
@@ -18,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     ToolbarModule,
     ExploreModule,
+    FavsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
