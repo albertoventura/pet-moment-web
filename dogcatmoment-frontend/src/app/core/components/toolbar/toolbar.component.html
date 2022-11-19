@@ -1,14 +1,27 @@
-<mat-toolbar class="toolbar-content">
+<mat-toolbar >
   <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
    <mat-icon>menu</mat-icon>
  </button> -->
- <div class="toolbar-title-field">
-   <span *ngIf="isToShowDog">Dog Moment!</span>
-   <span *ngIf="!isToShowDog">Cat Moment!</span>
- </div>
- <div>
-   <span class="animal-type-slide-title">Cat</span>
-   <mat-slide-toggle [(ngModel)]="isToShowDog" (change)="onToggle($event)" [checked]="isToShowDog"></mat-slide-toggle>
-   <span class="animal-type-slide-title">Dog</span>
- </div>
+  <mat-toolbar-row class="toolbar-content">
+    <div class="flex-space-around">
+      <div class="toolbar-title-field">
+        <span *ngIf="isToShowDog">Dog Moment!</span>
+        <span *ngIf="!isToShowDog">Cat Moment!</span>
+      </div>
+      <div class="flex-space-around nav-field">
+        <a class="nav-link" (click)="goToExplorePage()">
+          Explore
+        </a>
+        <a class="nav-link" (click)="goToFavsPage()">
+          Favs
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <span class="animal-type-slide-title">Cat</span>
+      <mat-slide-toggle [(ngModel)]="isToShowDog" (change)="onToggle($event)" [checked]="isToShowDog"></mat-slide-toggle>
+      <span class="animal-type-slide-title">Dog</span>
+    </div>
+  </mat-toolbar-row>
 </mat-toolbar>

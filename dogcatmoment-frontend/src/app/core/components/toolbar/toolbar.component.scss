@@ -3,7 +3,32 @@
   flex-direction: row;
   justify-content: space-between;
 }
-
+.nav-field{
+  margin-left: 10px;
+  .nav-link {
+    margin-left: 10px;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: normal;
+    color: #9b5dff;
+    padding: 1px 10px;
+    cursor: pointer;
+  }
+  .nav-link:hover {
+    font-weight: 400;
+    color: #8940ff;
+    background-color: #e7e7e7;
+    border-radius: 6px;
+    transition: .3s ease;
+  }
+}
+.flex-space-around{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
 .animal-type-slide-title {
   margin: 0 11px;
 }
+
+

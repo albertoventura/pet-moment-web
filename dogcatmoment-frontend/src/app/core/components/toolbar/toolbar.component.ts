@@ -1,5 +1,7 @@
+import { routerLabels } from './../../constants/router-labels';
 import { ViewerService } from './../../../features/viewer/service/viewer.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-toolbar',
@@ -8,7 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
   isToShowDog: boolean;
-  constructor(private viewerService: ViewerService) {
+  constructor(
+    private viewerService: ViewerService,
+    private route: Router,
+  ) {
     this.isToShowDog = true;
   }
 
@@ -16,11 +21,16 @@ export class ToolbarComponent implements OnInit {
   }
 
   onToggle(event: any){
-    console.log(event.checked);
     this.isToShowDog = event.checked
-
     this.viewerService.onToggleChange(this.isToShowDog);
     this.viewerService.setValue(event.checked);
+  }
+
+  goToExplorePage(){
+    this.route.navigate([routerLabels.explore]);
+  }
+  goToFavsPage(){
+    this.route.navigate([routerLabels.favs]);
   }
 
 }

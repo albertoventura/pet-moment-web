@@ -41,8 +41,6 @@ export class ViewerComponent implements OnInit {
     let data = new Data();
     this.viewerService.getImages().subscribe(
       (a) => {
-        console.log('animal', a);
-        console.log('breeds', a[0]?.breeds[0]);
         data.id = a[0]?.id;
         data.img = a[0]?.url;
         data.width = a[0]?.width;
@@ -51,27 +49,17 @@ export class ViewerComponent implements OnInit {
         data.breedDescription = a[0]?.breeds[0]?.description;
         data.breedTemperament = a[0]?.breeds[0]?.temperament;
         this.data = data;
-        console.log('data', this.data);
         this.isLoading = false;
         this.hasImg = true;
-        //this.dogs = a;
-        //this.dogs = a
-        //console.log(this.dogs[0]);
-
       }
     );
   }
   getBreedList(){
     this.viewerService.getBreedList().subscribe(
       (breeds) => {
-        //console.log('breedsssss', breeds);
         breeds.forEach( breed => {
           this.breedList.push(breed.name)
         })
-        //this.dogs = a;
-        //this.dogs = a
-        //console.log(this.dogs[0]);
-        console.log('breedlist', this.breedList);
       }
     );
   }
