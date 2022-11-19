@@ -10,18 +10,24 @@
           <option *ngFor="let breed of breedList">{{breed}}</option>
         </select>
       </div> -->
-      <img mat-card-image [src]="data?.img" [alt]="data?.breedName">
+      <div class="img-content">
+        <div class="overlay">
+          <mat-spinner *ngIf="isLoading && hasImg"></mat-spinner>
+        </div>
+        <img mat-card-image [src]="data?.img" [alt]="data?.breedName" [ngClass]="isLoading ? 'img-half-opacity' : ''">
+      </div>
+
       <mat-card-actions class="actions-field">
         <div>
-          <button mat-icon-button (click)="saveDataOnLocalstorage()" [ngClass]="dataSaved ? 'red': ''">
+          <button mat-icon-button (click)="saveDataOnLocalstorage()" [ngClass]="dataSaved ? 'red': ''" matTooltip="Save this photo">
             <mat-icon>favorite</mat-icon>
           </button>
-          <button mat-icon-button [cdkCopyToClipboard]="data?.img!">
+          <!-- <button mat-icon-button [cdkCopyToClipboard]="data?.img!"> -->
+          <button mat-icon-button [cdkCopyToClipboard]="data?.img!" matTooltip="Copy to clipboard">
             <mat-icon>content_copy</mat-icon>
-
           </button>
         </div>
-        <button mat-icon-button (click)="getImage()">
+        <button mat-icon-button (click)="getImage()" matTooltip="Get a new photo">
           <mat-icon>autorenew</mat-icon>
         </button>
       </mat-card-actions>

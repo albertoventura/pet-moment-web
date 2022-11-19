@@ -2,7 +2,7 @@ import { LocalstorageService } from './../../core/services/localstorage.service'
 import { ViewerService } from './service/viewer.service';
 import { Component, OnInit } from '@angular/core';
 import { Data } from './model/viewer.model';
-
+import { copyImageToClipboard } from 'copy-image-clipboard'
 @Component({
   selector: 'app-viewer',
   templateUrl: './viewer.component.html',
@@ -12,6 +12,7 @@ export class ViewerComponent implements OnInit {
   dataSaved: boolean;
   data?: Data;
   isLoading: boolean;
+  hasImg: boolean;
   breedList: string[] = [];
 
   constructor(
@@ -19,6 +20,7 @@ export class ViewerComponent implements OnInit {
     private localstorageService: LocalstorageService,
   ) {
     this.isLoading = true;
+    this.hasImg = false;
     this.dataSaved = false;
   }
 
@@ -51,7 +53,7 @@ export class ViewerComponent implements OnInit {
         this.data = data;
         console.log('data', this.data);
         this.isLoading = false;
-
+        this.hasImg = true;
         //this.dogs = a;
         //this.dogs = a
         //console.log(this.dogs[0]);
@@ -78,5 +80,14 @@ export class ViewerComponent implements OnInit {
     console.log(this.data?.id!, this.data);
 
     this.localstorageService.set(this.data?.id!, this.data);
+  }
+  copyImage(){
+    copyImageToClipboard(this.data?.img!)
+      .then(() => {
+        console.log('Image Copied')
+      })
+      .catch((e) => {
+        console.log('Error: ', e.message)
+      })
   }
 }
