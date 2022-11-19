@@ -25,11 +25,7 @@ export class ViewerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.get();
-    console.log('all?', this.localstorageService.getAllWithoutId());
-
     this.viewerService.getValue().subscribe((value) => {
-      console.log('@@@@@@@@@@@@', value);
       this.getImage();
     });
     this.getBreedList();
@@ -65,8 +61,6 @@ export class ViewerComponent implements OnInit {
   }
   saveDataOnLocalstorage(){
     this.dataSaved = true;
-    console.log(this.data?.id!, this.data);
-
     this.localstorageService.set(this.data?.id!, this.data);
   }
   copyImage(){
