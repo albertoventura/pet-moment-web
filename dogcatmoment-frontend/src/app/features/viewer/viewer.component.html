@@ -5,17 +5,23 @@
         <mat-card-title >{{data?.breedName}}</mat-card-title>
         <!-- <mat-card-subtitle>{{data?.breedDescription}}</mat-card-subtitle> -->
       </mat-card-header>
+      <!-- <div>
+        <select name="" id="">
+          <option *ngFor="let breed of breedList">{{breed}}</option>
+        </select>
+      </div> -->
       <img mat-card-image [src]="data?.img" [alt]="data?.breedName">
       <mat-card-actions class="actions-field">
         <div>
-          <button mat-icon-button color="warn" >
+          <button mat-icon-button (click)="saveDataOnLocalstorage()" [ngClass]="dataSaved ? 'red': ''">
             <mat-icon>favorite</mat-icon>
           </button>
-          <button mat-icon-button >
-            <mat-icon>send</mat-icon>
+          <button mat-icon-button [cdkCopyToClipboard]="data?.img!">
+            <mat-icon>content_copy</mat-icon>
+
           </button>
         </div>
-        <button mat-icon-button (click)="get()">
+        <button mat-icon-button (click)="getImage()">
           <mat-icon>autorenew</mat-icon>
         </button>
       </mat-card-actions>

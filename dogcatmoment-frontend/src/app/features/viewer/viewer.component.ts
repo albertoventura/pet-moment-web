@@ -1,3 +1,4 @@
+import { LocalstorageService } from './../../core/services/localstorage.service';
 import { ViewerService } from './service/viewer.service';
 import { Component, OnInit } from '@angular/core';
 import { Data } from './model/viewer.model';
@@ -8,26 +9,35 @@ import { Data } from './model/viewer.model';
   styleUrls: ['./viewer.component.scss']
 })
 export class ViewerComponent implements OnInit {
-
+  dataSaved: boolean;
   data?: Data;
   isLoading: boolean;
+  breedList: string[] = [];
 
-  constructor(private viewerService: ViewerService) {
+  constructor(
+    private viewerService: ViewerService,
+    private localstorageService: LocalstorageService,
+  ) {
     this.isLoading = true;
+    this.dataSaved = false;
   }
 
   ngOnInit(): void {
     //this.get();
+    console.log('all?', this.localstorageService.getAllWithoutId());
+
     this.viewerService.getValue().subscribe((value) => {
       console.log('@@@@@@@@@@@@', value);
-      this.get();
+      this.getImage();
     });
+    this.getBreedList();
   }
 
-  get(){
+  getImage(){
+    this.dataSaved = false;
     this.isLoading = true;
     let data = new Data();
-    this.viewerService.get().subscribe(
+    this.viewerService.getImages().subscribe(
       (a) => {
         console.log('animal', a);
         console.log('breeds', a[0]?.breeds[0]);
@@ -48,5 +58,25 @@ export class ViewerComponent implements OnInit {
 
       }
     );
+  }
+  getBreedList(){
+    this.viewerService.getBreedList().subscribe(
+      (breeds) => {
+        //console.log('breedsssss', breeds);
+        breeds.forEach( breed => {
+          this.breedList.push(breed.name)
+        })
+        //this.dogs = a;
+        //this.dogs = a
+        //console.log(this.dogs[0]);
+        console.log('breedlist', this.breedList);
+      }
+    );
+  }
+  saveDataOnLocalstorage(){
+    this.dataSaved = true;
+    console.log(this.data?.id!, this.data);
+
+    this.localstorageService.set(this.data?.id!, this.data);
   }
 }

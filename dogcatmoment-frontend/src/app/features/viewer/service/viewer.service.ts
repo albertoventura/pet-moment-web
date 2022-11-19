@@ -12,8 +12,10 @@ import { key } from 'key/key';
 })
 export class ViewerService {
 
-  dogUrl = 'https://api.thedogapi.com/v1/images/search';
-  catUrl = 'https://api.thecatapi.com/v1/images/search';
+  dogUrl = 'https://api.thedogapi.com/v1';
+  catUrl = 'https://api.thecatapi.com/v1';
+  breedParams = '/breeds'
+  imageParams = '/images/search'
   mainUrl = '';
   private toShowDog: BehaviorSubject<boolean>;
   showDog: boolean = true;
@@ -30,16 +32,20 @@ export class ViewerService {
     }
   }
 
-  get(): Observable<any[]> {
+  getImages(): Observable<any[]> {
     this.chooseDogOrCatUrl();
     const httpOptions = {
       headers: new HttpHeaders({
         'x-api-key': this.showDog ? key.dog_key : key.cat_key
       })
     };
-    return this.http.get<any[]>(this.mainUrl, httpOptions);
+    return this.http.get<any[]>(this.mainUrl+this.imageParams, httpOptions);
   }
 
+  getBreedList(): Observable<any[]> {
+    this.chooseDogOrCatUrl();
+    return this.http.get<any[]>(this.mainUrl+this.breedParams);
+  }
   onToggleChange(showDog: boolean){
     console.log('on change in service', showDog);
     this.showDog = showDog;

@@ -8,8 +8,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ViewerModule } from './features/viewer/viewer.module';
 import { HttpClientModule } from '@angular/common/http';
-
-
 @NgModule({
   declarations: [
     AppComponent,
