@@ -1,14 +1,17 @@
 import { LocalstorageService } from './../../core/services/localstorage.service';
-import { ViewerService } from './service/viewer.service';
+//import { dataService } from './service/viewer.service';
 import { Component, OnInit } from '@angular/core';
-import { Data } from './model/viewer.model';
 import { copyImageToClipboard } from 'copy-image-clipboard'
+import { DataService } from 'src/app/core/services/data.service';
+import { Data } from 'src/app/core/models/data.model';
+
 @Component({
-  selector: 'app-viewer',
-  templateUrl: './viewer.component.html',
-  styleUrls: ['./viewer.component.scss']
+  selector: 'app-explore',
+  templateUrl: './explore.component.html',
+  styleUrls: ['./explore.component.scss']
 })
-export class ViewerComponent implements OnInit {
+export class ExploreComponent implements OnInit {
+
   dataSaved: boolean;
   data?: Data;
   isLoading: boolean;
@@ -16,7 +19,7 @@ export class ViewerComponent implements OnInit {
   breedList: string[] = [];
 
   constructor(
-    private viewerService: ViewerService,
+    private dataService: DataService,
     private localstorageService: LocalstorageService,
   ) {
     this.isLoading = true;
@@ -25,7 +28,7 @@ export class ViewerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.viewerService.getValue().subscribe((value) => {
+    this.dataService.getValue().subscribe((value) => {
       this.getImage();
     });
     this.getBreedList();
@@ -35,7 +38,7 @@ export class ViewerComponent implements OnInit {
     this.dataSaved = false;
     this.isLoading = true;
     let data = new Data();
-    this.viewerService.getImages().subscribe(
+    this.dataService.getImages().subscribe(
       (a) => {
         data.id = a[0]?.id;
         data.img = a[0]?.url;
@@ -51,7 +54,7 @@ export class ViewerComponent implements OnInit {
     );
   }
   getBreedList(){
-    this.viewerService.getBreedList().subscribe(
+    this.dataService.getBreedList().subscribe(
       (breeds) => {
         breeds.forEach( breed => {
           this.breedList.push(breed.name)
@@ -72,4 +75,5 @@ export class ViewerComponent implements OnInit {
         console.log('Error: ', e.message)
       })
   }
+
 }

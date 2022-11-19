@@ -1,6 +1,6 @@
+import { ExploreComponent } from './features/explore/explore.component';
 import { FavsComponent } from './features/favs/favs.component';
 import { routerLabels } from './core/constants/router-labels';
-import { ViewerComponent } from './features/viewer/viewer.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -14,7 +14,7 @@ const routes: Routes = [
   {
     path: routerLabels.explore,
     pathMatch: 'full',
-    component: ViewerComponent,
+    component: ExploreComponent,
   },
   {
     path: routerLabels.favs,

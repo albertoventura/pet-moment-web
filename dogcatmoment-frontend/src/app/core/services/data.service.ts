@@ -1,16 +1,12 @@
 import { Injectable, Input } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { IData } from '../model/viewer.model';
 import { key } from 'key/key';
-
-
 
 @Injectable({
   providedIn: 'root'
 })
-export class ViewerService {
+export class DataService {
 
   dogUrl = 'https://api.thedogapi.com/v1';
   catUrl = 'https://api.thecatapi.com/v1';

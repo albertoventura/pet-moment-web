@@ -1,7 +1,7 @@
 import { routerLabels } from './../../constants/router-labels';
-import { ViewerService } from './../../../features/viewer/service/viewer.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class ToolbarComponent implements OnInit {
   isToShowDog: boolean;
   constructor(
-    private viewerService: ViewerService,
+    private dataService: DataService,
     private route: Router,
   ) {
     this.isToShowDog = true;
@@ -22,8 +22,8 @@ export class ToolbarComponent implements OnInit {
 
   onToggle(event: any){
     this.isToShowDog = event.checked
-    this.viewerService.onToggleChange(this.isToShowDog);
-    this.viewerService.setValue(event.checked);
+    this.dataService.onToggleChange(this.isToShowDog);
+    this.dataService.setValue(event.checked);
   }
 
   goToExplorePage(){

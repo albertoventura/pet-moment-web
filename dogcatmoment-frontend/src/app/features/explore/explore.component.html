@@ -14,7 +14,13 @@
         <div class="overlay">
           <mat-spinner *ngIf="isLoading && hasImg"></mat-spinner>
         </div>
-        <img mat-card-image [src]="data?.img" [alt]="data?.breedName" [ngClass]="isLoading ? 'img-half-opacity' : ''">
+        <img
+          mat-card-image
+          [src]="data?.img"
+          [alt]="data?.breedName"
+          [ngClass]="isLoading ? 'img-half-opacity' : ''"
+          *ngIf="data?.img"
+        >
       </div>
 
       <mat-card-actions class="actions-field">
