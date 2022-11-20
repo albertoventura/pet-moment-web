@@ -1,5 +1,4 @@
 import { LocalstorageService } from './../../core/services/localstorage.service';
-//import { dataService } from './service/viewer.service';
 import { Component, OnInit } from '@angular/core';
 import { copyImageToClipboard } from 'copy-image-clipboard'
 import { DataService } from 'src/app/core/services/data.service';
@@ -39,17 +38,8 @@ export class ExploreComponent implements OnInit {
   getImage(){
     this.dataSaved = false;
     this.isLoading = true;
-    //let data = new Data();
     this.dataService.getImages().subscribe(
       (dataFromApi) => {
-        /* data.id = a[0]?.id;
-        data.img = a[0]?.url;
-        data.width = a[0]?.width;
-        data.height = a[0]?.height;
-        data.breedName = a[0]?.breeds[0]?.name;
-        data.breedDescription = a[0]?.breeds[0]?.description;
-        data.breedTemperament = a[0]?.breeds[0]?.temperament;
-        this.data = data; */
         this.data = this.dataService.buildObject(dataFromApi);
         this.isLoading = false;
         this.hasImg = true;
