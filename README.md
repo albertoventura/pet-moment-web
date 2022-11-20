@@ -8,7 +8,7 @@ I used some API's to get all the images
 - https://thecatapi.com/
 
 ### Features
-Basicly i use http request and save all the favs images on local storage
+Basically i use http request and save all the favs images on local storage
 
 ### Tech
 All the project was created with Angular 13 and Angular Material
