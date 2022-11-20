@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { copyImageToClipboard } from 'copy-image-clipboard'
 import { DataService } from 'src/app/core/services/data.service';
 import { Data } from 'src/app/core/models/data.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-explore',
@@ -21,6 +22,7 @@ export class ExploreComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private localstorageService: LocalstorageService,
+    private _snackBar: MatSnackBar
   ) {
     this.isLoading = true;
     this.hasImg = false;
@@ -37,17 +39,18 @@ export class ExploreComponent implements OnInit {
   getImage(){
     this.dataSaved = false;
     this.isLoading = true;
-    let data = new Data();
+    //let data = new Data();
     this.dataService.getImages().subscribe(
-      (a) => {
-        data.id = a[0]?.id;
+      (dataFromApi) => {
+        /* data.id = a[0]?.id;
         data.img = a[0]?.url;
         data.width = a[0]?.width;
         data.height = a[0]?.height;
         data.breedName = a[0]?.breeds[0]?.name;
         data.breedDescription = a[0]?.breeds[0]?.description;
         data.breedTemperament = a[0]?.breeds[0]?.temperament;
-        this.data = data;
+        this.data = data; */
+        this.data = this.dataService.buildObject(dataFromApi);
         this.isLoading = false;
         this.hasImg = true;
       }
@@ -62,9 +65,26 @@ export class ExploreComponent implements OnInit {
       }
     );
   }
-  saveDataOnLocalstorage(){
-    this.dataSaved = true;
-    this.localstorageService.set(this.data?.id!, this.data);
+  saveOrDeleteDataOnLocalstorage(data: Data){
+    data.isSaved = !data.isSaved;
+    if(data.isSaved) {
+      this.saveOnLocalstorage(data);
+    }else{
+      this.deleteFromLocalstorage(this.data!);
+    }
+  }
+  saveOnLocalstorage(data: Data){
+    this.localstorageService.set(data?.id!, data);
+    this.showSnackBar('Your image was saved!', 'Ok!');
+  }
+  deleteFromLocalstorage(data: Data){
+    this.localstorageService.delete(data?.id!);
+    this.showSnackBar('Your image was unsaved!', 'Ok!');
+  }
+  showSnackBar(msg: string, action: string, duration:number = 3000){
+    this._snackBar.open(msg, action, {
+      duration: duration,
+    });
   }
   copyImage(){
     copyImageToClipboard(this.data?.img!)

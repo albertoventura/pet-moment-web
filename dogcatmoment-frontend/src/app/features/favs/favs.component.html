@@ -1,5 +1,14 @@
-<ng-container *ngFor="let fav of favList">
-  <mat-card>
-    <img [src]="fav._img" alt="">
-  </mat-card>
-<ng-container>
+<ng-container *ngIf="(favList.length > 0) else noFav">
+  <div *ngFor="let fav of favList; let i = index" class="content">
+    <app-card
+      *ngIf="fav"
+      [data]="fav!"
+      [hasGetImgButton]="false"
+      [dataSaved]="fav.isSaved"
+      (saveOrDeleteDataOnLocalstorage)="saveOrDeleteDataOnLocalstorage(fav, i)"
+    ></app-card>
+  </div>
+</ng-container>
+<ng-template #noFav>
+  <div>You dont have favs! :(</div>
+</ng-template>

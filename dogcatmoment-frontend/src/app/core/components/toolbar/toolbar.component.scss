@@ -31,4 +31,17 @@
   margin: 0 11px;
 }
 
+.toolbar-title-field{
+  display: flex;
+  color: #353535;
+  .logo-img {
+    line-height: 28px;
+    font-size: 28px;
+    margin-right: 8px;
+  }
+  .logo-text {
+    font-family: 'Nerko One', cursive;
+    font-size: 25px;
+  }
 
+}

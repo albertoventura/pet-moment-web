@@ -8,7 +8,7 @@
 }
 
 .content {
-  width: 600px;
+  width: 500px;
 }
 .img-content{
   position: relative;
@@ -40,4 +40,9 @@ mat-spinner {
 
 .red {
   color: #f44336;
+}
+
+mat-card {
+  margin: 20px 0;
+  max-width: 600px;
 }

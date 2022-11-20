@@ -1,19 +1,21 @@
-export interface IData {
+/* export interface IData {
   id: string;
   url: string;
   width: number;
   height: number
-}
+} */
 
 export class Data {
-  private _id?: string;
-  private _img?: string;
-  private _width?: number;
-  private _height?: number;
-  private _breedName?: string;
-  private _breedDescription?: string;
-  private _breedTemperament?: string;
+  public id?: string;
+  public img?: string;
+  public width?: number;
+  public height?: number;
+  public breedName?: string;
+  public breedDescription?: string;
+  public breedTemperament?: string;
+  public isSaved?: boolean;
 
+  /*
   get id(){
     return this._id || '';
   }
@@ -62,4 +64,5 @@ export class Data {
   set breedTemperament(breedTemperament: string){
     this._breedTemperament = breedTemperament ? breedTemperament : '';
   }
+  */
 }

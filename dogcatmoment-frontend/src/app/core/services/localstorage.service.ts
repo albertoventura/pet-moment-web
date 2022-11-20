@@ -19,12 +19,16 @@ export class LocalstorageService {
   clear(){
     this.storage.clear();
   }
+  delete(key: string){
+    this.storage.removeItem(key);
+  }
   checkLength(){
     if(Object.keys(localStorage).length > 0){
       return true;
     }
     return false;
   }
+
   getAllWithoutId(){
     let item;
     let datas: any[] = [];

@@ -5,8 +5,10 @@
   <mat-toolbar-row class="toolbar-content">
     <div class="flex-space-around">
       <div class="toolbar-title-field">
-        <span *ngIf="isToShowDog">Dog Moment!</span>
-        <span *ngIf="!isToShowDog">Cat Moment!</span>
+        <!-- <span *ngIf="isToShowDog">Dog Moment!</span>
+        <span *ngIf="!isToShowDog">Cat Moment!</span> -->
+        <mat-icon class="logo-img">pets</mat-icon>
+        <div class="logo-text">Pet Moment</div>
       </div>
       <div class="flex-space-around nav-field">
         <a class="nav-link" (click)="goToExplorePage()">
