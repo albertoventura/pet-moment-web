@@ -5,6 +5,7 @@ import { DataService } from 'src/app/core/services/data.service';
 import { Data } from 'src/app/core/models/data.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
+import { general } from 'src/app/core/constants/general';
 
 @Component({
   selector: 'app-explore',
@@ -112,10 +113,10 @@ export class ExploreComponent implements OnInit, OnDestroy {
     this.dataService.setValue(this.isToShowDog);
   }
   saveCurrentAnimalChoice(){
-    this.localstorageService.set('isToShowDog', this.isToShowDog);
+    this.localstorageService.set(general.isToShowDog, this.isToShowDog);
   }
   getAnimalChoice(){
-    this.isToShowDog = this.localstorageService.get('isToShowDog');
+    this.isToShowDog = this.localstorageService.get(general.isToShowDog);
     console.log('istoShowDog?', this.isToShowDog);
 
   }

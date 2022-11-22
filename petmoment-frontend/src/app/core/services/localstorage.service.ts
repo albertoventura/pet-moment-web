@@ -1,5 +1,5 @@
+import { general } from './../constants/general';
 import { Injectable } from '@angular/core';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -34,7 +34,7 @@ export class LocalstorageService {
     let datas: any[] = [];
     Object.keys(localStorage).forEach(data =>
       {
-        if(data != 'isToShowDog'){
+        if(data != general.isToShowDog){
           item = JSON.parse(localStorage.getItem(data)!);
           datas.push(item);
         }
