@@ -15,7 +15,7 @@ export class DataService {
   imageParams = '/images/search'
   mainUrl = '';
   private toShowDog: BehaviorSubject<boolean>;
-  showDog: boolean = true;
+  showDog!: boolean;
 
   constructor(private http: HttpClient) {
     this.toShowDog = new BehaviorSubject<boolean>(true);
@@ -65,5 +65,8 @@ export class DataService {
     data.breedDescription = dataFromApi[0]?.breeds[0]?.description;
     data.breedTemperament = dataFromApi[0]?.breeds[0]?.temperament;
     return data;
+  }
+  setAnimalToggle(isToShowDog: boolean){
+    this.showDog = isToShowDog;
   }
 }

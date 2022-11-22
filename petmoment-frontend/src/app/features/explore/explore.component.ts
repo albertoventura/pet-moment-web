@@ -1,24 +1,25 @@
 import { LocalstorageService } from './../../core/services/localstorage.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { copyImageToClipboard } from 'copy-image-clipboard'
 import { DataService } from 'src/app/core/services/data.service';
 import { Data } from 'src/app/core/models/data.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-explore',
   templateUrl: './explore.component.html',
   styleUrls: ['./explore.component.scss']
 })
-export class ExploreComponent implements OnInit {
+export class ExploreComponent implements OnInit, OnDestroy {
 
   dataSaved: boolean;
   data?: Data;
   isLoading: boolean;
   hasImg: boolean;
   breedList: string[] = [];
-
   isToShowDog!: boolean;
+  subs = new Subscription();
 
   constructor(
     private dataService: DataService,
@@ -31,31 +32,39 @@ export class ExploreComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAnimalChoice();
-    this.dataService.getValue().subscribe((value) => {
-      this.getImage();
-    });
-    this.getBreedList();
+
+    this.subs.add(
+      this.dataService.getValue().subscribe((value) => {
+        this.getAnimalChoice();
+        this.dataService.setAnimalToggle(this.isToShowDog);
+        this.getImage();
+      })
+    );
+    //this.getBreedList();
   }
 
   getImage(){
     this.dataSaved = false;
     this.isLoading = true;
-    this.dataService.getImages().subscribe(
-      (dataFromApi) => {
-        this.data = this.dataService.buildObject(dataFromApi);
-        this.isLoading = false;
-        this.hasImg = true;
-      }
+    this.subs.add(
+      this.dataService.getImages().subscribe(
+        (dataFromApi) => {
+          this.data = this.dataService.buildObject(dataFromApi);
+          this.isLoading = false;
+          this.hasImg = true;
+        }
+      )
     );
   }
   getBreedList(){
-    this.dataService.getBreedList().subscribe(
-      (breeds) => {
-        breeds.forEach( breed => {
-          this.breedList.push(breed.name)
-        })
-      }
+    this.subs.add(
+      this.dataService.getBreedList().subscribe(
+        (breeds) => {
+          breeds.forEach( breed => {
+            this.breedList.push(breed.name)
+          })
+        }
+      )
     );
   }
   saveOrDeleteDataOnLocalstorage(data: Data){
@@ -107,5 +116,11 @@ export class ExploreComponent implements OnInit {
   }
   getAnimalChoice(){
     this.isToShowDog = this.localstorageService.get('isToShowDog');
+    console.log('istoShowDog?', this.isToShowDog);
+
+  }
+
+  ngOnDestroy(){
+    this.subs.unsubscribe();
   }
 }
