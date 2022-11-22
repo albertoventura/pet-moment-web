@@ -9,21 +9,12 @@ import { DataService } from '../../services/data.service';
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent implements OnInit {
-  isToShowDog: boolean;
   constructor(
-    private dataService: DataService,
     private route: Router,
   ) {
-    this.isToShowDog = true;
   }
 
   ngOnInit(): void {
-  }
-
-  onToggle(event: any){
-    this.isToShowDog = event.checked
-    this.dataService.onToggleChange(this.isToShowDog);
-    this.dataService.setValue(event.checked);
   }
 
   goToExplorePage(){

@@ -1,0 +1,56 @@
+.animal-selector{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+  .icon-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    width: 150px;
+
+    .icon {
+      cursor: pointer;
+      filter: invert(50%) sepia(78%) saturate(10%) hue-rotate(222deg) brightness(50%) contrast(0%);
+      transition: .3s ease;
+    }
+
+    .icon:hover,
+    .icon:focus {
+      filter: invert(50%) sepia(100%) saturate(266%) hue-rotate(217deg) brightness(105%) contrast(124%);
+      transition: .3s ease;
+    }
+
+    .dog {
+      width: 50px;
+    }
+    .cat {
+      width: 58px;
+    }
+    .ic-field {
+      padding: 10px;
+      border-radius: 50%;
+      //background-color: #1f1;
+    }
+    .ic-field-dog {
+      height: 50px;
+    }
+    .ic-field-cat {
+      height: 50px;
+      width: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .ic-field.selected {
+      background-color: #a75dff;
+      transition: .3s ease;
+    }
+    .ic-field.selected .icon{
+      filter: invert(106%) sepia(100%) saturate(266%) hue-rotate(217deg) brightness(105%) contrast(124%);
+      transition: .3s ease;
+    }
+  }
+
+}

@@ -34,8 +34,10 @@ export class LocalstorageService {
     let datas: any[] = [];
     Object.keys(localStorage).forEach(data =>
       {
-        item = JSON.parse(localStorage.getItem(data)!);
-        datas.push(item);
+        if(data != 'isToShowDog'){
+          item = JSON.parse(localStorage.getItem(data)!);
+          datas.push(item);
+        }
       });
     return datas;
   }

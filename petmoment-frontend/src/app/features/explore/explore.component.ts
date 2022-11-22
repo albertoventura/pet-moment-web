@@ -18,6 +18,8 @@ export class ExploreComponent implements OnInit {
   hasImg: boolean;
   breedList: string[] = [];
 
+  isToShowDog!: boolean;
+
   constructor(
     private dataService: DataService,
     private localstorageService: LocalstorageService,
@@ -29,6 +31,7 @@ export class ExploreComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getAnimalChoice();
     this.dataService.getValue().subscribe((value) => {
       this.getImage();
     });
@@ -86,4 +89,23 @@ export class ExploreComponent implements OnInit {
       })
   }
 
+  onToggleAnimal(value: any){
+    switch(value){
+      case 'dog':
+        this.isToShowDog = true;
+        break;
+      case 'cat':
+        this.isToShowDog = false;
+        break;
+    }
+    this.saveCurrentAnimalChoice();
+    this.dataService.onToggleChange(this.isToShowDog);
+    this.dataService.setValue(this.isToShowDog);
+  }
+  saveCurrentAnimalChoice(){
+    this.localstorageService.set('isToShowDog', this.isToShowDog);
+  }
+  getAnimalChoice(){
+    this.isToShowDog = this.localstorageService.get('isToShowDog');
+  }
 }

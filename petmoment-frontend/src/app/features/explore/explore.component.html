@@ -1,14 +1,26 @@
 <div class="container">
   <div class="content">
-    <app-card
-      [data]="data!"
-      [isLoading]="isLoading"
-      [hasImg]="hasImg"
-      [dataSaved]="data?.isSaved!"
-      [hasGetImgButton]="true"
-      (saveOrDeleteDataOnLocalstorage)="saveOrDeleteDataOnLocalstorage(data!)"
-      (getNewImage)="getImage()"
-    ></app-card>
+    <div class="animal-selector">
+      <div class="icon-container">
+        <div class="ic-field ic-field-dog" [ngClass]="isToShowDog ? 'selected' : ''" (click)="onToggleAnimal('dog')">
+          <img src="./assets/ic/ic-dog.svg" alt="" class="icon dog">
+        </div>
+        <div class="ic-field ic-field-cat" [ngClass]="!isToShowDog ? 'selected' : ''" (click)="onToggleAnimal('cat')">
+          <img src="./assets/ic/ic-cat.svg" alt="" class="icon cat">
+        </div>
+      </div>
+    </div>
+    <div class="card-field">
+      <app-card
+        [data]="data!"
+        [isLoading]="isLoading"
+        [hasImg]="hasImg"
+        [dataSaved]="data?.isSaved!"
+        [hasGetImgButton]="true"
+        (saveOrDeleteDataOnLocalstorage)="saveOrDeleteDataOnLocalstorage(data!)"
+        (getNewImage)="getImage()"
+      ></app-card>
+    </div>
   </div>
 </div>
 
