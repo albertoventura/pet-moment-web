@@ -1,6 +1,14 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title >{{data?.breedName}}</mat-card-title>
+    <button mat-icon-button
+      (click)="emitDeleteThisImageFromFav()"
+      color="warn"
+      matTooltip="Delete this image from favorite"
+      *ngIf="hasDeleteButton"
+    >
+      <mat-icon>cancel</mat-icon>
+    </button>
   </mat-card-header>
   <div class="img-content">
     <div class="overlay">

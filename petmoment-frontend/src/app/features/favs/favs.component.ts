@@ -33,6 +33,11 @@ export class FavsComponent implements OnInit {
     this.localstorageService.delete(data?.id!);
     this.showSnackBar('Your image was unsaved!', 'Ok!');
   }
+  deleteEmptyDataFromLocalstorage(data: Data, i: number){
+    this.favList[i].isSaved = !data.isSaved
+    this.localstorageService.delete(data?.id!);
+    this.showSnackBar('Your image was unsaved!', 'Ok!');
+  }
   saveOrDeleteDataOnLocalstorage(data: Data, i: number){
     if(data.isSaved){
       this.openDialog(data,i);
@@ -40,6 +45,11 @@ export class FavsComponent implements OnInit {
       this.favList[i].isSaved = !data.isSaved
       this.saveOnLocalstorage(data);
     }
+  }
+  deleteThisImageFromFav(data: Data, i: number){
+    console.log(data,i);
+    this.deleteDataFromLocalstorage(data, i);
+
   }
   showSnackBar(msg: string, action: string, duration:number = 3000){
     this._snackBar.open(msg, action, {

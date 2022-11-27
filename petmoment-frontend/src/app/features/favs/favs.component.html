@@ -1,11 +1,13 @@
 <ng-container *ngIf="(favList.length > 0) else noFav">
   <div *ngFor="let fav of favList; let i = index" class="content">
     <app-card
-      *ngIf="fav"
+      *ngIf="fav.isSaved == true || false"
       [data]="fav!"
       [hasGetImgButton]="false"
       [dataSaved]="fav.isSaved"
       (saveOrDeleteDataOnLocalstorage)="saveOrDeleteDataOnLocalstorage(fav, i)"
+      (deleteThisImageFromFav)="deleteThisImageFromFav(fav,i)"
+      [hasDeleteButton]="false"
     ></app-card>
   </div>
 </ng-container>

@@ -13,8 +13,10 @@ export class CardComponent implements OnInit {
   @Input() hasImg!: Boolean;
   @Input() dataSaved!: Boolean;
   @Input() hasGetImgButton!: Boolean;
+  @Input() hasDeleteButton!: Boolean;
   @Output() saveOrDeleteDataOnLocalstorage = new EventEmitter;
   @Output() getNewImage = new EventEmitter;
+  @Output() deleteThisImageFromFav = new EventEmitter;
 
   constructor() { }
 
@@ -27,5 +29,9 @@ export class CardComponent implements OnInit {
 
   emitGetNewImage() {
     this.getNewImage.emit();
+  }
+
+  emitDeleteThisImageFromFav() {
+    this.deleteThisImageFromFav.emit();
   }
 }

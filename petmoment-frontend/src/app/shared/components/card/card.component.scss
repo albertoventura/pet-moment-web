@@ -10,6 +10,15 @@
 .content {
   width: 500px;
 }
+mat-card-header {
+  position: relative;
+
+  button {
+    position: absolute;
+    right: -32px;
+    top: -32px;
+  }
+}
 .img-content{
   position: relative;
 }
